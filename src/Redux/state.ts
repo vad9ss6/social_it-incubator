@@ -1,10 +1,8 @@
-export type StoreType ={
+export type StoreType = {
     _state: StateType
     _callSubscriber: _callSubscriberType
-    getState:() => StateType
+    getState: () => StateType
     subscribe: subscribeType
-    addPost: addPostType
-    updateNewPostText: updateNewPostTextType
     dispatch: dispatchType
 }
 
@@ -29,6 +27,7 @@ export type MessageType = {
 export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
+
 }
 export type PostType = {
     id: number
@@ -38,23 +37,23 @@ export type PostType = {
 
 export type addPostType = () => void
 export type updateNewPostTextType = (value: string) => void
-export type dispatchType = () => void
-export type _callSubscriberType = (state:StateType) => void
-export type subscribeType = (value:() => void) => void
+export type dispatchType = (action?: any) => void
+export type _callSubscriberType = (state: StateType) => void
+export type subscribeType = (value: () => void) => void
 
 
-const store:StoreType = {
+const store: StoreType = {
     _state: {
-        profilePage:{
-            posts:[
-                {id:1, message:'hi, how are you?', likesCount: 12},
-                {id:2, message:'Hello world', likesCount: 26},
-                {id:3, message:'Hello world', likesCount: 26},
+        profilePage: {
+            posts: [
+                {id: 1, message: 'hi, how are you?', likesCount: 12},
+                {id: 2, message: 'Hello world', likesCount: 26},
+                {id: 3, message: 'Hello world', likesCount: 26},
             ],
             newPostText: 'it-kamasutra'
         },
-        dialogsPage:{
-            dialogs:[
+        dialogsPage: {
+            dialogs: [
                 {id: 1, name: 'vadim'},
                 {id: 2, name: 'andrey'},
                 {id: 3, name: 'sasha'},
@@ -62,7 +61,7 @@ const store:StoreType = {
                 {id: 5, name: 'viktor'},
                 {id: 6, name: 'denis'},
             ],
-            messages:[
+            messages: [
                 {id: 1, message: 'hi'},
                 {id: 2, message: 'react the best'},
                 {id: 3, message: 'yo yo yo '},
@@ -70,29 +69,37 @@ const store:StoreType = {
             ]
         },
     },
-    _callSubscriber () {
+    _callSubscriber() {
 
     },
 
-    getState () {
+    getState() {
         return this._state;
     },
-    subscribe (observer) {
+    subscribe(observer) {
         this._callSubscriber = observer
     },
 
-    addPost () {
-        let newPost = {id:5, message:this._state.profilePage.newPostText, likesCount: 0};
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.newPostText = '';
-        this._callSubscriber(this._state);
-    },
-    updateNewPostText (value: string) {
-        this._state.profilePage.newPostText = value
-        this._callSubscriber(this._state)
-    },
-    dispatch () {
-
+    // addPost () {
+    //     let newPost = {id:5, message:this._state.profilePage.newPostText, likesCount: 0};
+    //     this._state.profilePage.posts.push(newPost);
+    //     this._state.profilePage.newPostText = '';
+    //     this._callSubscriber(this._state);
+    // },
+    // updateNewPostText (value: string) {
+    //     this._state.profilePage.newPostText = value
+    //     this._callSubscriber(this._state)
+    // },
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            let newPost = {id: 5, message: this._state.profilePage.newPostText, likesCount: 0};
+            this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.newPostText = '';
+            this._callSubscriber(this._state);
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.value
+            this._callSubscriber(this._state)
+        }
     }
 }
 export default store

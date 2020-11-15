@@ -18,8 +18,10 @@ import {StateType} from "./Redux/state";
 
 type AppPropsType = {
     state: StateType
-    addPost: () => void
-    updateNewPostText: (value: string) => void
+    dispatch: () => void
+
+    // addPost: () => void
+    // updateNewPostText: (value: string) => void
 }
 
 function App(props: AppPropsType) {
@@ -29,7 +31,7 @@ function App(props: AppPropsType) {
             <SideBar/>
             <div className={"app-wrapper-content"}>
                 <Route path='/dialogs' render={() => <Dialogs dialogsPage={props.state.dialogsPage} />}/>
-                <Route path='/profile' render={() => <Profile profilePage={props.state.profilePage} addPost={props.addPost} updateNewPostText={props.updateNewPostText} />}/>
+                <Route path='/profile' render={() => <Profile profilePage={props.state.profilePage} dispatch={props.dispatch} />}/>
             </div>
             <Footer/>
         </div>
