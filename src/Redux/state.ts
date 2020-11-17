@@ -1,6 +1,5 @@
 const ADD_POST = 'ADD-POST';
-
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const UPDATE_NEW_POST_TEXT ='UPDATE-NEW-POST-TEXT';
 
 export type StoreType = {
     _state: StateType
@@ -107,7 +106,7 @@ const store: StoreType = {
     }
 }
 
-export const addPostAC = () => ({ADD_POST})
-export const changeTextAC = (newValue: string) => ({UPDATE_NEW_POST_TEXT, value: newValue})
+export const addPostAC = () => ({type: ADD_POST})
+export const changeTextAC = (newValue: string) => ({type: UPDATE_NEW_POST_TEXT, value: newValue})
 
 export default store
