@@ -6,17 +6,11 @@ type ProfilePropsType = {
     profilePage: ProfilePageType
     newPostText: string
     dispatch: (action: any) => void
-
-    // addPost: addPostType
-    // updateNewPostText: (value: string) => void
 }
 
 
 
 const MyPosts = (props: ProfilePropsType) => {
-
-
-
     const addPostHandler = () => {
         props.dispatch(addPostAC())
     }
@@ -24,7 +18,6 @@ const MyPosts = (props: ProfilePropsType) => {
         let newValue = e.currentTarget.value
         props.dispatch(changeTextAC(newValue))
     }
-
     return (
         <div>
             <h3>MyPosts</h3>
