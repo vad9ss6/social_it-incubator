@@ -7,9 +7,6 @@ type ProfilePropsType = {
     newPostText: string
     dispatch: (action: any) => void
 }
-
-
-
 const MyPosts = (props: ProfilePropsType) => {
     const addPostHandler = () => {
         props.dispatch(addPostAC())
