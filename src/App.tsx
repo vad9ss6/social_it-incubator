@@ -18,7 +18,7 @@ import {StateType} from "./Redux/state";
 
 type AppPropsType = {
     state: StateType
-    dispatch: () => void
+    dispatch: (action: any) => void
 
     // addPost: () => void
     // updateNewPostText: (value: string) => void

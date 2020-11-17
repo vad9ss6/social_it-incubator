@@ -3,7 +3,8 @@ import s from "./Dialogs.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 
-import {addMessageAC, DialogsPageType, newMessageTextAC} from "../../Redux/state";
+import {DialogsPageType} from "../../Redux/state";
+import {addMessageAC, newMessageTextAC} from "../../Redux/dialogs-reducer";
 
 
 
