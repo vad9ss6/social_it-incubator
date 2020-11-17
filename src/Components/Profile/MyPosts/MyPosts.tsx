@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from "react";
 import Post from "./Post/Post";
-import {ProfilePageType} from "../../../Redux/state";
+import {addPostAC, changeTextAC, ProfilePageType} from "../../../Redux/state";
 
 type ProfilePropsType = {
     profilePage: ProfilePageType
@@ -11,16 +11,18 @@ type ProfilePropsType = {
     // updateNewPostText: (value: string) => void
 }
 
+
+
 const MyPosts = (props: ProfilePropsType) => {
 
 
 
     const addPostHandler = () => {
-       props.dispatch({type:'ADD-POST'})
+        props.dispatch(addPostAC())
     }
     const changeText = (e:ChangeEvent<HTMLTextAreaElement>) => {
         let newValue = e.currentTarget.value
-        props.dispatch({type:'UPDATE-NEW-POST-TEXT', value: newValue})
+        props.dispatch(changeTextAC(newValue))
     }
 
     return (

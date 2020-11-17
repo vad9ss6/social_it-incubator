@@ -1,3 +1,6 @@
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+
 export type StoreType = {
     _state: StateType
     _callSubscriber: _callSubscriberType
@@ -35,7 +38,7 @@ export type PostType = {
     likesCount: number
 }
 
-export type addPostType = () => void
+// export type addPostType = () => void
 export type updateNewPostTextType = (value: string) => void
 export type dispatchType = (action?: any) => void
 export type _callSubscriberType = (state: StateType) => void
@@ -102,4 +105,8 @@ const store: StoreType = {
         }
     }
 }
+
+export const addPostAC = () => ({ADD_POST})
+export const changeTextAC = (newValue: string) => ({UPDATE_NEW_POST_TEXT, value: newValue})
+
 export default store
