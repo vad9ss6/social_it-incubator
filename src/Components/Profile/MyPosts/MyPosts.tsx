@@ -19,7 +19,7 @@ const MyPosts = (props: ProfilePropsType) => {
         <div>
             <h3>MyPosts</h3>
             <div>
-                <textarea value={props.newPostText} onChange={changeText} />
+                <textarea placeholder='Enter your post' value={props.newPostText} onChange={changeText} />
                 <button onClick={addPostHandler}>Add</button>
             </div>
             {props.profilePage.posts.map(p => <Post key={p.id} message={p.message} like={p.likesCount}/>)}
