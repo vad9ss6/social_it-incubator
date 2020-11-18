@@ -1,27 +1,27 @@
 import React, {ChangeEvent} from "react";
 import Post from "./Post/Post";
 import {ProfilePageType} from "../../../Redux/state";
-import {addPostAC, changeTextAC} from "../../../Redux/profile-reducer";
+
 
 type ProfilePropsType = {
     profilePage: ProfilePageType
-    newPostText: string
-    dispatch: (action: any) => void
+    addPost: () => void
+    onPostChange: (newValue: string) => void
 }
 const MyPosts = (props: ProfilePropsType) => {
-    const addPostHandler = () => {
-        props.dispatch(addPostAC())
+    const onAddPost = () => {
+        props.addPost()
     }
-    const changeText = (e:ChangeEvent<HTMLTextAreaElement>) => {
-        let newValue = e.currentTarget.value
-        props.dispatch(changeTextAC(newValue))
+    const onChangeText = (e:ChangeEvent<HTMLTextAreaElement>) => {
+        const newValue = e.currentTarget.value
+        props.onPostChange(newValue)
     }
     return (
         <div>
             <h3>MyPosts</h3>
             <div>
-                <textarea placeholder='Enter your post' value={props.newPostText} onChange={changeText} />
-                <button onClick={addPostHandler}>Add</button>
+                <textarea placeholder='Enter your post' value={props.profilePage.newPostText} onChange={onChangeText} />
+                <button onClick={onAddPost}>Add</button>
             </div>
             {props.profilePage.posts.map(p => <Post key={p.id} message={p.message} like={p.likesCount}/>)}
         </div>

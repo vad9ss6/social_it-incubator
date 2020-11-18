@@ -4,22 +4,18 @@ import Header from "./Components/Header/Header";
 import SideBar from "./Components/SideBar/SideBar";
 import Profile from "./Components/Profile/Profile";
 import Footer from "./Components/Footer/Footer";
-import Dialogs from "./Components/Dialogs/Dialogs";
 import {Route} from 'react-router-dom';
-import {StateType} from "./Redux/state";
+import {DialogsPageType, ProfilePageType} from "./Redux/state";
+import {StateType} from "./index";
+import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 
 
-// type AppType = {
-//     state: StateType
-//     addPost: addPostType
-//     updateNewPostText:(value: string) => void
-//     subscribe?:(funRererender:() => void) => void
-// }
+
 
 type AppPropsType = {
     state: any
     dispatch: (action: any) => void
-
+    store: any
     // addPost: () => void
     // updateNewPostText: (value: string) => void
 }
@@ -30,8 +26,8 @@ function App(props: AppPropsType) {
             <Header/>
             <SideBar/>
             <div className={"app-wrapper-content"}>
-                <Route path='/dialogs' render={() => <Dialogs dialogsPage={props.state.dialogsPage} dispatch={props.dispatch} />}/>
-                <Route path='/profile' render={() => <Profile profilePage={props.state.profilePage} dispatch={props.dispatch} />}/>
+                <Route path='/dialogs' render={() => <DialogsContainer  dialogsPage={props.state.dialogsPage} dispatch={props.dispatch} />}/>
+                <Route path='/profile' render={() => <Profile store={props.store} />}/>
             </div>
             <Footer/>
         </div>

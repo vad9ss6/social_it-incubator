@@ -6,13 +6,19 @@ import * as serviceWorker from './serviceWorker';
 
 import {BrowserRouter} from "react-router-dom";
 import {store} from "./Redux/redux-store";
+import {DialogsPageType, ProfilePageType} from "./Redux/state";
 
+export type StateType = {
+    profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
+}
 
 const rerenderEntireTree = (state: any) =>{
+
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App state={state} dispatch={store.dispatch.bind(store)} />
+                <App  state={state} dispatch={store.dispatch.bind(store)} store={store}/>
             </BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')
