@@ -19,7 +19,6 @@ type DialogsPropsType = {
 }
 
 const Dialogs = (props:DialogsPropsType) => {
-
     const onUpdateNewMessageText = (e:ChangeEvent<HTMLTextAreaElement>) => {
         const newMessage = e.currentTarget.value
         props.updateNewMessageText(newMessage)
