@@ -15,7 +15,7 @@ type DialogsPageType = {
 type DialogsPropsType = {
     dialogsPage: DialogsPageType
     updateNewMessageText: (value: string) => void
-    onSendMessageClick: () => void
+    sendMessageClick: () => void
 }
 
 const Dialogs = (props:DialogsPropsType) => {
@@ -24,7 +24,7 @@ const Dialogs = (props:DialogsPropsType) => {
         props.updateNewMessageText(newMessage)
     }
     const onSendMessageClick = () => {
-        props.onSendMessageClick()
+        props.sendMessageClick()
     }
 
     return (
