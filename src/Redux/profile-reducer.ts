@@ -41,7 +41,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
         case 'ADD-POST':
             return {
                 ...state,
-                posts: [...state.posts, {id: 5, message: state.newPostText, likesCount: 0}],
+                posts: [...state.posts, {id: state.posts[state.posts.length-1].id+1, message: state.newPostText, likesCount: 0}],
                 newPostText: ''
             }
         case 'UPDATE-NEW-POST-TEXT':
