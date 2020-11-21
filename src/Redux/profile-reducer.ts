@@ -38,16 +38,17 @@ const initialState:ProfilePageType = {
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionProfileType) => {
 
     switch (action.type) {
-        case 'ADD-POST': {
-            const newPost = {id: 5, message: state.newPostText, likesCount: 0};
-            state.newPostText = ''
-            return {...state, posts: [...state.posts, newPost]}
-        }
-        case 'UPDATE-NEW-POST-TEXT': {
-            const copyState = {...state}
-            copyState.newPostText = action.value
-            return copyState
-        }
+        case 'ADD-POST':
+            return {
+                ...state,
+                posts: [...state.posts, {id: 5, message: state.newPostText, likesCount: 0}],
+                newPostText: ''
+            }
+        case 'UPDATE-NEW-POST-TEXT':
+            return {
+                ...state,
+                newPostText: action.value
+            }
         case 'LIKE-COUNT': {
             const post = state.posts.find(p => p.id === action.id)
             if(post){
