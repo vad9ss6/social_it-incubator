@@ -1,5 +1,6 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT ='UPDATE-NEW-POST-TEXT';
+const LIKE_COUNT = 'LIKE-COUNT'
 
 export type addPostType = {
     type: 'ADD-POST'
@@ -8,8 +9,12 @@ export type updateNewPostTextType = {
     type: 'UPDATE-NEW-POST-TEXT'
     value: string
 }
+export type countLikeType = {
+    type: 'LIKE-COUNT'
+    id: number
+}
 
-export type ActionProfileType = addPostType | updateNewPostTextType
+export type ActionProfileType = addPostType | updateNewPostTextType | countLikeType
 
 type ProfilePageType = {
     posts: Array<PostType>
@@ -43,6 +48,16 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
             copyState.newPostText = action.value
             return copyState
         }
+        case 'LIKE-COUNT': {
+            const post = state.posts.find(p => p.id === action.id)
+            if(post){
+                post.likesCount = post.likesCount + 1
+            }
+            return {
+                ...state,
+                posts: [...state.posts]
+            }
+        }
         default:
             return state
     }
@@ -50,3 +65,4 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
 
 export const addPostAC = ():addPostType => ({type: ADD_POST})
 export const changeTextAC = (newValue: string):updateNewPostTextType => ({type: UPDATE_NEW_POST_TEXT, value: newValue})
+export const countLikeAC =(id: number): countLikeType => ({type: LIKE_COUNT, id})

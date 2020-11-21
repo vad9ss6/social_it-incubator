@@ -12,6 +12,7 @@ type ProfilePropsType = {
     newPostText: string
     addPost: () => void
     onPostChange: (newValue: string) => void
+    onLikeCount: (id: number) => void
 }
 const MyPosts = (props: ProfilePropsType) => {
 
@@ -30,7 +31,7 @@ const MyPosts = (props: ProfilePropsType) => {
                 <textarea placeholder='Enter your post' value={props.newPostText} onChange={onChangeText} />
                 <button onClick={onAddPost}>Add</button>
             </div>
-            {props.posts.map(p => <Post key={p.id} message={p.message} like={p.likesCount}/>)}
+            {props.posts.map(p => <Post key={p.id} id={p.id} message={p.message} like={p.likesCount} onLikeCount={props.onLikeCount}/>)}
         </div>
     )
 }

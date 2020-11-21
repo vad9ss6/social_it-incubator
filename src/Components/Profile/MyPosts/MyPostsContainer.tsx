@@ -1,5 +1,5 @@
 import React from "react";
-import {addPostAC, changeTextAC} from "../../../Redux/profile-reducer";
+import {addPostAC, changeTextAC, countLikeAC} from "../../../Redux/profile-reducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 
@@ -28,6 +28,9 @@ const mapDispatchToProps = (dispatch: any) =>{
         },
         onPostChange: (newValue: string) =>{
             dispatch(changeTextAC(newValue))
+        },
+        onLikeCount: (id: number) =>{
+            dispatch(countLikeAC(id))
         }
     }
 }
