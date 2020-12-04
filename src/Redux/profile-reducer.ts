@@ -16,7 +16,7 @@ export type countLikeType = {
 
 export type ActionProfileType = addPostType | updateNewPostTextType | countLikeType
 
-type ProfilePageType = {
+export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
 }

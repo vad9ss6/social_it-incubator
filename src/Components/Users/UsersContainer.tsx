@@ -8,13 +8,19 @@ type UserPagePropType = {
     usersPage: UsersType
 }
 
+type MDTPType = {
+    follow: (id: number) => void
+    unFollow: (id: number) => void
+    setUsers: (users: Array<users>) => void
+}
+
 const mapStateToProps = (state: UserPagePropType) => {
     return {
         users: state.usersPage.users
     }
 }
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: any):MDTPType => {
     return {
         follow: (id: number) =>{
             dispatch(followAC(id))

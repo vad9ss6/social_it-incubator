@@ -20,11 +20,11 @@ type setUsersActionType = {
 
 type ActionDialogsType = followActionType | unFollowActionType | setUsersActionType
 
-type initialStateType = {
+export type usersType = {
     users: Array<users>
 }
 
-const initialState: initialStateType  = {
+const initialState: usersType  = {
     users: []
 }
 

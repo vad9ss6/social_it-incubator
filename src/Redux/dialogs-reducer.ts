@@ -11,7 +11,7 @@ export type updateNewMessagesTextType = {
 
 export type ActionDialogsType = addMessagesType | updateNewMessagesTextType
 
-type DialogsPageType = {
+export type DialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessageType>
     newMessageText: string

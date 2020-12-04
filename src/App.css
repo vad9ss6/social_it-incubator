@@ -4,7 +4,7 @@
     height: 500px;
     grid-template: [header-left] "head head"[header-right]
                  [main-left]   "sideBar  main" 1fr  [main-right]
-                 [footer-left] "sideBar  foot" 30px [footer-right]
+                 [footer-left] "foot  foot" 30px [footer-right]
                  / 120px 1fr;
 }
 
