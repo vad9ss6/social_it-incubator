@@ -1,13 +1,13 @@
 import React from 'react';
-import axios from 'axios';
-import avatar from '../../assets/avatar.png'
+import avatar from '../../assets/images/avatar.png'
+import Pagination from 'react-js-pagination';
+
 
 type PhotoType = {
     small: string
     large: string
 }
-
-export type users = {
+export type usersAPIComponent = {
     name: string
     id: number
     uniqueUrlName: string
@@ -15,40 +15,46 @@ export type users = {
     status: string
     followed: boolean
 }
-export type UsersType = {
-    users: Array<users>
+export type UsersPropType = {
+    users: Array<usersAPIComponent>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
     follow: (id: number) => void
     unFollow: (id: number) => void
-    setUsers: (users: Array<users>) => void
+    onCurrentPage: (p: number) => void
 }
 
-class Users extends React.Component<UsersType>{
-    componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-            this.props.setUsers(response.data.items)
-        });
-    }
+const Users = (props: UsersPropType) => {
+    // let pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
+    // let page = []
+    // for (let i = 1; i <= pageCount; i++){
+    //     page.push(i)
+    // }
+    return <div>
+        <div>
 
-    render() {
-        return <div>
-
-            {
-                this.props.users.map(u => <div key={u.id}>
-                    <div>
-                        <img src={u.photos.small? u.photos.small : avatar} alt="" style={{width: '100px', height: 'auto'}}/>
-                    </div>
-                    <div>
-                        {u.name}
-                    </div>
-                    {
-                        u.followed
-                            ? <button onClick={() => this.props.unFollow(u.id)}>unfollow</button>
-                            : <button onClick={() => this.props.follow(u.id)}>follow</button>
-                    }
-                </div>)
-            }
+            <Pagination totalItemsCount={props.totalUsersCount}
+                        itemsCountPerPage={props.pageSize}
+                        pageRangeDisplayed={5}
+                        onChange={(pageNumber) => props.onCurrentPage(pageNumber)}
+                        activePage={props.currentPage}/>
         </div>
-    }
+        {
+            props.users.map(u => <div key={u.id}>
+                <div>
+                    <img src={u.photos.small? u.photos.small : avatar} alt="" style={{width: '100px', height: 'auto'}}/>
+                </div>
+                <div>
+                    {u.name}
+                </div>
+                {
+                    u.followed
+                        ? <button onClick={() => props.unFollow(u.id)}>unfollow</button>
+                        : <button onClick={() => props.follow(u.id)}>follow</button>
+                }
+            </div>)
+        }
+    </div>
 }
-
 export default Users

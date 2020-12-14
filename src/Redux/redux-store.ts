@@ -10,6 +10,7 @@ const reducers = combineReducers({
     dialogsPage:dialogsReducer,
     usersPage: usersReducer
 })
+export type IGlobalState = ReturnType<typeof reducers>;
 
 export const store = createStore(reducers)
 

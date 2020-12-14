@@ -20,7 +20,7 @@ function App() {
             <div className={"app-wrapper-content"}>
                 <Route path='/dialogs' render={() => <DialogsContainer />}/>
                 <Route path='/profile' render={() => <Profile/>}/>
-                <Route path='/users' render={() => <UsersContainer />}/>
+                <Route path='/usersAPIComponent' render={() => <UsersContainer />}/>
             </div>
             <Footer/>
         </div>

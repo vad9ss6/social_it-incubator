@@ -8,7 +8,7 @@ const SideBar = () => {
             <nav>
                 <NavLink to="/profile" >Profile</NavLink>
                 <NavLink to="/dialogs">Messages</NavLink>
-                <NavLink to="/users">Users</NavLink>
+                <NavLink to="/usersAPIComponent">Users</NavLink>
             </nav>
         </aside>
     )
