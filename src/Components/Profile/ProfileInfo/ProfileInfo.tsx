@@ -1,11 +1,17 @@
 import React from "react";
 import  s from "./ProfileInfo.module.css";
+import {userProfileType} from "../../../Redux/profile-reducer";
 
+type ProfileInfoPropsType = {
+    profile: userProfileType
+}
 
-const ProfileInfo = () => {
+const ProfileInfo = (props: ProfileInfoPropsType) => {
     return(
         <div className={s.content}>
-            <div>Images</div>
+            <div>
+                <img src={props.profile.photos.large} alt=""/>
+            </div>
             <div>hello + avatar</div>
         </div>
     )

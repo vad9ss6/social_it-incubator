@@ -1,16 +1,17 @@
-import React, {Dispatch} from 'react';
+import React from 'react';
 import {connect} from "react-redux";
 import {
     followAC,
     setUsersAC,
     unFollowAC,
     setCurrentPageAC,
-    setTotalUsersCountAC, DispatchUserType, usersType, setIsFetchingAC
+    setTotalUsersCountAC,  usersType, setIsFetchingAC
 } from "../../Redux/users-reducer";
 import axios from "axios";
 import Users from "./Users";
 import {IGlobalState} from "../../Redux/redux-store";
 import {Preloader} from "../Common/Preloader/Preloader";
+
 
 
 type usersPhotoType = {
@@ -59,8 +60,10 @@ class UsersAPIComponent extends React.Component<UsersPropType>{
             });
     }
 
-    render() {
-        return this.props.isFetching ? <Preloader/> : <Users users={this.props.users}
+    render()
+
+    {
+        return  this.props.isFetching ? <Preloader/> :  <Users users={this.props.users}
                       currentPage={this.props.currentPage}
                       follow={this.props.follow}
                       unFollow={this.props.unFollow}
@@ -81,39 +84,6 @@ const mapStateToProps = (state: IGlobalState): usersType => {
 
     }
 }
-
-type MDTPType = {
-    follow: (id: number) => void
-    unFollow: (id: number) => void
-    setUsers: (users: Array<userType>) => void
-    setCurrentPage: (p: number) => void
-    setTotalUsersCount: (count: number) => void
-    setIsFetching: (isFetching: boolean) => void
-}
-
-// const mapDispatchToProps = (dispatch: Dispatch<DispatchUserType>): MDTPType => {
-//     return {
-//         follow: (id: number) => {
-//             dispatch(followAC(id))
-//         },
-//         unFollow: (id: number) => {
-//             dispatch(unFollowAC(id))
-//         },
-//         setUsers: (users: Array<userType>) => {
-//             dispatch(setUsersAC(users))
-//         },
-//         setCurrentPage: (p: number) => {
-//             dispatch(setCurrentPageAC(p))
-//         },
-//         setTotalUsersCount: (count: number) => {
-//             dispatch(setTotalUsersCountAC(count))
-//         },
-//         setIsFetching: (isFetching: boolean) => {
-//             dispatch(setIsFetchingAC(isFetching))
-//         }
-//     }
-// }
-
 
 export const UsersContainer = connect(mapStateToProps, {
     follow: followAC,

@@ -5,12 +5,12 @@ import { usersReducer } from "./users-reducer";
 
 
 
-const reducers = combineReducers({
+const reducer = combineReducers({
     profilePage:profileReducer,
     dialogsPage:dialogsReducer,
     usersPage: usersReducer
 })
-export type IGlobalState = ReturnType<typeof reducers>;
+export type IGlobalState = ReturnType<typeof reducer>;
 
-export const store = createStore(reducers)
+export const store = createStore(reducer)
 
