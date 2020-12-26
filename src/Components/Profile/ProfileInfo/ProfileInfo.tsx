@@ -10,7 +10,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
     return(
         <div className={s.content}>
             <div>
-                <img src={props.profile.photos.large} alt=""/>
+                {props.profile.photos.large ? <img src={props.profile.photos.large} alt=""/> : ''}
             </div>
             <div>hello + avatar</div>
         </div>
