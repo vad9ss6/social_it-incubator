@@ -2,7 +2,7 @@ import React from "react";
 import Profile from "../Profile";
 import axios from "axios";
 import { connect } from "react-redux";
-import {setUserProfileAC, userProfileType} from "../../../Redux/profile-reducer";
+import { setUserProfileAC, userProfileType } from "../../../Redux/profile-reducer";
 import {IGlobalState} from "../../../Redux/redux-store";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 
@@ -22,8 +22,10 @@ type PropsType = RouteComponentProps<PathParamsType> & ProfileContainerPropsType
 
 class ProfileContainer extends React.Component<PropsType>{
     componentDidMount() {
-
-        let userId = this.props.match.params.userId
+        let userId = this.props.match.params.userId;
+        if(!userId){
+            userId = '2'
+        }
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
             .then(response => {
                 this.props.setUserProfileAC(response.data)
