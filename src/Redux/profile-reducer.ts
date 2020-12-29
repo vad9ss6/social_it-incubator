@@ -57,9 +57,9 @@ export type userProfileType = {
 
 const initialState: ProfilePageType = {
     posts: [
-        // {id: 1, message: 'hi, how are you?', likesCount: 12},
-        // {id: 2, message: 'Hello world', likesCount: 26},
-        // {id: 3, message: 'Hello world', likesCount: 26},
+        {id: 1, message: 'hi, how are you?', likesCount: 12},
+        {id: 2, message: 'Hello world', likesCount: 26},
+        {id: 3, message: 'Hello world', likesCount: 26},
     ] as Array<PostType>,
     newPostText: '',
     profile: {

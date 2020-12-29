@@ -26,6 +26,7 @@ class HeaderContainer extends React.Component<PropsType,{}> {
                     this.props.setAuthUserDateAC(response.data.data)
                 }
             })
+
     }
 
     render(){
