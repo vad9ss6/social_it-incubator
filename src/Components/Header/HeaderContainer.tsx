@@ -16,7 +16,7 @@ type MSTPType = {
 
 
 type PropsType = MDTPType & MSTPType
-class HeaderContainer extends React.Component<PropsType,{}> {
+class HeaderContainer extends React.Component<PropsType> {
     componentDidMount() {
         axios.get('https://social-network.samuraijs.com/api/1.0/auth/me', {
             withCredentials: true
