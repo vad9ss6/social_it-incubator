@@ -14,4 +14,10 @@ export const usersAPI = {
     }
 }
 
+export const AuthMe = {
+    getAuthMe(){
+        return instance.get('auth/me')
+    }
+}
+
 

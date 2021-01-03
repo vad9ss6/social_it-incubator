@@ -2,7 +2,7 @@ import React from 'react';
 import avatar from '../../assets/images/avatar.png'
 import Pagination from "react-js-pagination";
 import styleUser from './users.module.css'
-import { NavLink } from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import axios from "axios";
 
 
@@ -27,6 +27,9 @@ export type UsersPropType = {
     follow: (id: number) => void
     unFollow: (id: number) => void
     onCurrentPage: (p: number) => void
+    followingInProgress: Array<any>
+    toggleIsFollowingProgress: (isFetching: boolean, userId: number) => void
+
 }
 
 const Users = (props: UsersPropType) => {
@@ -35,21 +38,24 @@ const Users = (props: UsersPropType) => {
     // for (let i = 1; i <= pageCount; i++){
     //     page.push(i)
     // }
+
     return <div>
         <div>
             <Pagination totalItemsCount={props.totalUsersCount}
                         itemsCountPerPage={props.pageSize}
                         pageRangeDisplayed={5}
                         onChange={(pageNumber) => props.onCurrentPage(pageNumber)}
-                        activePage={props.currentPage} innerClass={styleUser.pagination} itemClass={styleUser.pagination_item}/>
+                        activePage={props.currentPage} innerClass={styleUser.pagination}
+                        itemClass={styleUser.pagination_item}/>
 
         </div>
         <div className={styleUser.accounts}>
             {
-                props.users.map(u => <div key={u.id} className={styleUser.page} >
+                props.users.map(u => <div key={u.id} className={styleUser.page}>
                     <div>
                         <NavLink to={`/profile/${u.id}`}>
-                            <img src={u.photos.small? u.photos.small : avatar} alt="" style={{width: '100px', height: 'auto'}}/>
+                            <img src={u.photos.small ? u.photos.small : avatar} alt=""
+                                 style={{width: '100px', height: 'auto'}}/>
                         </NavLink>
                     </div>
                     <div>
@@ -57,7 +63,9 @@ const Users = (props: UsersPropType) => {
                     </div>
                     {
                         u.followed
-                            ? <button onClick={() => {
+                            ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                props.toggleIsFollowingProgress(true, u.id)
+
                                 axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
                                     withCredentials: true,
                                     headers: {
@@ -69,10 +77,13 @@ const Users = (props: UsersPropType) => {
                                         if (response.data.resultCode === 0) {
                                             props.unFollow(u.id)
                                         }
+                                        props.toggleIsFollowingProgress(false, u.id)
                                     })
 
+
                             }}>unfollow</button>
-                            : <button onClick={() => {
+                            : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                props.toggleIsFollowingProgress(true, u.id)
                                 axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
                                     withCredentials: true,
                                     headers: {
@@ -84,7 +95,9 @@ const Users = (props: UsersPropType) => {
                                         if (response.data.resultCode === 0) {
                                             props.follow(u.id)
                                         }
+                                        props.toggleIsFollowingProgress(false, u.id)
                                     })
+
                             }}>follow</button>
                     }
                 </div>)

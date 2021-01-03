@@ -5,14 +5,12 @@ import {
     setUsersAC,
     unFollowAC,
     setCurrentPageAC,
-    setTotalUsersCountAC,  usersType, setIsFetchingAC
+    setTotalUsersCountAC, usersType, setIsFetchingAC, toggleIsFollowingProgress
 } from "../../Redux/users-reducer";
 import Users from "./Users";
 import {IGlobalState} from "../../Redux/redux-store";
 import {Preloader} from "../Common/Preloader/Preloader";
-import { usersAPI } from '../../api/api';
-
-
+import {usersAPI} from '../../api/api';
 
 
 type usersPhotoType = {
@@ -39,9 +37,11 @@ export type UsersPropType = {
     setUsers: (users: Array<userType>) => void
     setTotalUsersCount: (count: number) => void
     setIsFetching: (isFetching: boolean) => void
+    followingInProgress: Array<any>
+    toggleIsFollowingProgress: (isFetching: boolean, userId: number) => void
 }
 
-class UsersAPIComponent extends React.Component<UsersPropType>{
+class UsersAPIComponent extends React.Component<UsersPropType> {
     componentDidMount() {
         this.props.setIsFetching(true)
         usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
@@ -51,7 +51,8 @@ class UsersAPIComponent extends React.Component<UsersPropType>{
                 this.props.setTotalUsersCount(data.totalCount)
             });
     }
-    onCurrentPage = (p:number) => {
+
+    onCurrentPage = (p: number) => {
         this.props.setCurrentPage(p)
         this.props.setIsFetching(true)
         usersAPI.getUsers(p, this.props.pageSize)
@@ -61,16 +62,18 @@ class UsersAPIComponent extends React.Component<UsersPropType>{
             });
     }
 
-    render()
+    render() {
+        return this.props.isFetching ? <Preloader/> : <Users users={this.props.users}
+                                                             currentPage={this.props.currentPage}
+                                                             follow={this.props.follow}
+                                                             unFollow={this.props.unFollow}
+                                                             pageSize={this.props.pageSize}
+                                                             totalUsersCount={this.props.totalUsersCount}
+                                                             followingInProgress={this.props.followingInProgress}
+                                                             toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
+                                                             onCurrentPage={this.onCurrentPage}/>
 
-    {
-        return  this.props.isFetching ? <Preloader/> :  <Users users={this.props.users}
-                      currentPage={this.props.currentPage}
-                      follow={this.props.follow}
-                      unFollow={this.props.unFollow}
-                      pageSize={this.props.pageSize}
-                      totalUsersCount={this.props.totalUsersCount}
-                      onCurrentPage={this.onCurrentPage} />
+
     }
 }
 
@@ -81,8 +84,8 @@ const mapStateToProps = (state: IGlobalState): usersType => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
-
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 
@@ -92,6 +95,7 @@ export const UsersContainer = connect(mapStateToProps, {
     setUsers: setUsersAC,
     setCurrentPage: setCurrentPageAC,
     setTotalUsersCount: setTotalUsersCountAC,
-    setIsFetching: setIsFetchingAC
+    setIsFetching: setIsFetchingAC,
+    toggleIsFollowingProgress: toggleIsFollowingProgress
 })(UsersAPIComponent)
 
