@@ -1,10 +1,9 @@
 import React from "react";
 import Header from "./Header";
-import axios from "axios";
 import {connect} from "react-redux";
 import {authType, setAuthUserDateAC} from "../../Redux/auth-reducer";
 import {IGlobalState} from "../../Redux/redux-store";
-import { AuthMe } from "../../api/api";
+import { usersAPI } from "../../api/api";
 
 
 type MDTPType = {
@@ -19,7 +18,7 @@ type MSTPType = {
 type PropsType = MDTPType & MSTPType
 class HeaderContainer extends React.Component<PropsType> {
     componentDidMount() {
-        AuthMe.getAuthMe()
+        usersAPI.AuthMe()
             .then(response =>{
                 if(response.data.resultCode === 0){
                     this.props.setAuthUserDateAC(response.data.data)

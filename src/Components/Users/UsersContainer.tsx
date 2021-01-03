@@ -1,11 +1,11 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {
-    followAC,
+
     setUsersAC,
-    unFollowAC,
+
     setCurrentPageAC,
-    setTotalUsersCountAC, usersType, setIsFetchingAC, toggleIsFollowingProgress
+    setTotalUsersCountAC, usersType, setIsFetchingAC, toggleIsFollowingProgress, follow, unFollow
 } from "../../Redux/users-reducer";
 import Users from "./Users";
 import {IGlobalState} from "../../Redux/redux-store";
@@ -30,9 +30,9 @@ export type UsersPropType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
-    isFetching: boolean
     follow: (id: number) => void
     unFollow: (id: number) => void
+    isFetching: boolean
     setCurrentPage: (p: number) => void
     setUsers: (users: Array<userType>) => void
     setTotalUsersCount: (count: number) => void
@@ -65,11 +65,11 @@ class UsersAPIComponent extends React.Component<UsersPropType> {
     render() {
         return this.props.isFetching ? <Preloader/> : <Users users={this.props.users}
                                                              currentPage={this.props.currentPage}
-                                                             follow={this.props.follow}
-                                                             unFollow={this.props.unFollow}
                                                              pageSize={this.props.pageSize}
                                                              totalUsersCount={this.props.totalUsersCount}
                                                              followingInProgress={this.props.followingInProgress}
+                                                             follow={this.props.follow}
+                                                             unFollow={this.props.unFollow}
                                                              toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
                                                              onCurrentPage={this.onCurrentPage}/>
 
@@ -90,8 +90,8 @@ const mapStateToProps = (state: IGlobalState): usersType => {
 }
 
 export const UsersContainer = connect(mapStateToProps, {
-    follow: followAC,
-    unFollow: unFollowAC,
+    follow,
+    unFollow,
     setUsers: setUsersAC,
     setCurrentPage: setCurrentPageAC,
     setTotalUsersCount: setTotalUsersCountAC,
