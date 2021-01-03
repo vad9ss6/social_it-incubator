@@ -8,10 +8,6 @@ import {UsersContainer} from "./Components/Users/UsersContainer";
 import ProfileContainer from "./Components/Profile/ProfileInfo/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 
-
-
-
-
 function App() {
     return (
         <div className="wrapper">

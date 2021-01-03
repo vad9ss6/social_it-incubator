@@ -6,7 +6,6 @@ type PostType = {
     message: string
     likesCount: number
 }
-
 type ProfilePropsType = {
     posts: Array<PostType>
     newPostText: string
@@ -14,8 +13,8 @@ type ProfilePropsType = {
     onPostChange: (newValue: string) => void
     onLikeCount: (id: number) => void
 }
-const MyPosts = (props: ProfilePropsType) => {
 
+const MyPosts = (props: ProfilePropsType) => {
     const onAddPost = () => {
         props.addPost()
     }
@@ -23,7 +22,6 @@ const MyPosts = (props: ProfilePropsType) => {
         const newValue = e.currentTarget.value
         props.onPostChange(newValue)
     }
-
     return (
         <div>
             <h3>MyPosts</h3>

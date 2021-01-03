@@ -3,11 +3,6 @@ import avatar from '../../assets/images/avatar.png'
 import Pagination from "react-js-pagination";
 import styleUser from './users.module.css'
 import {NavLink} from 'react-router-dom';
-import {usersAPI} from "../../api/api";
-import {follow} from "../../Redux/users-reducer";
-
-
-
 
 type PhotoType = {
     small: string

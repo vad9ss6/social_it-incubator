@@ -14,7 +14,6 @@ type MSTPType = {
     login: string | null
 }
 
-
 type PropsType = MDTPType & MSTPType
 class HeaderContainer extends React.Component<PropsType> {
     componentDidMount() {
