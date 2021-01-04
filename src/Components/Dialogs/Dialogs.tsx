@@ -4,6 +4,8 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogsType, MessageType} from "../../Redux/state";
 import commonStyle from "../Common/style/commonStyle.module.css";
+import {authType} from "../../Redux/auth-reducer";
+import { Redirect } from "react-router-dom";
 
 
 type DialogsPageType = {
@@ -17,6 +19,7 @@ type DialogsPropsType = {
     dialogsPage: DialogsPageType
     updateNewMessageText: (value: string) => void
     sendMessageClick: () => void
+    isAuth: boolean
 }
 
 const Dialogs = (props: DialogsPropsType) => {
@@ -28,23 +31,23 @@ const Dialogs = (props: DialogsPropsType) => {
         props.sendMessageClick()
     }
 
-    return (
-        <div className={s.dialogs}>
-            <div className={`${s.dialogsItems} ${commonStyle.container}`}>
-                {props.dialogsPage.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)}
+    if(!props.isAuth) return <Redirect to={'/Login'}/>
+
+    return <div className={s.dialogs}>
+        <div className={`${s.dialogsItems} ${commonStyle.container}`}>
+            {props.dialogsPage.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)}
+        </div>
+        <div className={commonStyle.container}>
+            <div className={s.messages}>
+                {props.dialogsPage.messages.map(m => <Message key={m.id} id={m.id} message={m.message}/>)}
             </div>
-            <div className={commonStyle.container}>
-                <div className={s.messages}>
-                    {props.dialogsPage.messages.map(m => <Message key={m.id} id={m.id} message={m.message}/>)}
-                </div>
-                <div>
+            <div>
                     <textarea placeholder='Enter your message' value={props.dialogsPage.newMessageText}
                               onChange={onUpdateNewMessageText}/>
-                    <button onClick={onSendMessageClick}>Add new message</button>
-                </div>
+                <button onClick={onSendMessageClick}>Add new message</button>
             </div>
         </div>
-    )
+    </div>
 }
 
 export default Dialogs
