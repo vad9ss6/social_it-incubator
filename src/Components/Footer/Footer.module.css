@@ -1,4 +1,10 @@
 .footer {
-    background-color: rosybrown;
+    background-color: #fff;
     grid-area: foot;
+    border-top: 1px solid #E8E9EC;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
 }
