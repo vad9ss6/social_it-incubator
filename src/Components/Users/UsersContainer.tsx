@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {
-    setCurrentPageAC,
     usersType,
     toggleIsFollowingProgress,
     follow,
@@ -11,7 +10,6 @@ import {
 import Users from "./Users";
 import {IGlobalState} from "../../Redux/redux-store";
 import {Preloader} from "../Common/Preloader/Preloader";
-
 
 type usersPhotoType = {
     small: string
@@ -35,8 +33,6 @@ export type UsersPropType = {
     follow: (id: number) => void
     unFollow: (id: number) => void
     getUsers: (currentPage: number, pageSize: number) => void,
-    setCurrentPage: (p: number) => void
-    toggleIsFollowingProgress: (isFetching: boolean, userId: number) => void
 
 }
 
@@ -44,27 +40,21 @@ class UsersAPIComponent extends React.Component<UsersPropType> {
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
-
-    onCurrentPage = (p: number) => {
-        this.props.getUsers(p, this.props.pageSize)
+    onCurrentPage = (currentPage: number) => {
+        this.props.getUsers(currentPage, this.props.pageSize)
+        // this.props.setCurrentPage(p)
     }
-
     render() {
-        return this.props.isFetching ? <Preloader/> : <Users users={this.props.users}
+        return this.props.isFetching  ? <Preloader/> : <Users users={this.props.users}
                                                              currentPage={this.props.currentPage}
                                                              pageSize={this.props.pageSize}
                                                              totalUsersCount={this.props.totalUsersCount}
                                                              followingInProgress={this.props.followingInProgress}
                                                              follow={this.props.follow}
                                                              unFollow={this.props.unFollow}
-                                                             toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
                                                              onCurrentPage={this.onCurrentPage}/>
-
-
     }
 }
-
-
 const mapStateToProps = (state: IGlobalState): usersType => {
     return {
         users: state.usersPage.users,
@@ -75,12 +65,10 @@ const mapStateToProps = (state: IGlobalState): usersType => {
         followingInProgress: state.usersPage.followingInProgress
     }
 }
-
 export const UsersContainer = connect(mapStateToProps, {
     follow,
     unFollow,
     getUsers,
-    setCurrentPage: setCurrentPageAC,
     toggleIsFollowingProgress: toggleIsFollowingProgress
 })(UsersAPIComponent)
 
