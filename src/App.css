@@ -2,16 +2,20 @@
     display: grid;
     width: 100%;
     height: 500px;
-    grid-template: [header-left] "head head"[header-right]
-                 [main-left]   "sideBar  main" 1fr  [main-right]
-                 [footer-left] "foot  foot" 30px [footer-right]
-                 / 120px 1fr;
+    grid-template:  "head head head"
+                    "sideBar  main main"
+                    ".  main main"
+                    "foot  foot foot"
+                    / 1fr 2fr 2fr;
 }
 
 
 .app-wrapper-content {
-    background-color: dimgray;
     grid-area: main;
+}
+
+.main_container{
+
 }
 
 

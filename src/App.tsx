@@ -18,7 +18,7 @@ function App() {
                 <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
                 <Route path='/usersAPIComponent' render={() => <UsersContainer />}/>
             </div>
-            <Footer/>
+            {/*<Footer/>*/}
         </div>
     );
 }

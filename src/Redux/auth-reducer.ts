@@ -1,3 +1,6 @@
+import {Dispatch} from "react";
+import {usersAPI} from "../api/api";
+
 const SET_USER_DATE = 'SET_USER_DATE'
 
 
@@ -22,6 +25,7 @@ const initialState: authType = {
 
 export const authReducer = (state = initialState, action: ActionDialogsType): authType => {
     switch (action.type) {
+
         case 'SET_USER_DATE':
             return {
                 ...state,
@@ -34,3 +38,14 @@ export const authReducer = (state = initialState, action: ActionDialogsType): au
 }
 
 export const setAuthUserDateAC = (data: authType): setUserType => ({type: SET_USER_DATE, data})
+
+export const getAuthUser = () => {
+    return (dispatch: Dispatch<any>) =>{
+        usersAPI.AuthMe()
+            .then(response =>{
+                if(response.data.resultCode === 0){
+                    dispatch(setAuthUserDateAC(response.data.data))
+                }
+            })
+    }
+}

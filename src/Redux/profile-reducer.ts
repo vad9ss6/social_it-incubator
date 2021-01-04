@@ -1,3 +1,6 @@
+import {Dispatch} from "react";
+import {profileAPI} from "../api/api";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const LIKE_COUNT = 'LIKE-COUNT'
@@ -127,3 +130,12 @@ export const addPostAC = (): addPostType => ({type: ADD_POST})
 export const changeTextAC = (newValue: string): updateNewPostTextType => ({type: UPDATE_NEW_POST_TEXT, value: newValue})
 export const countLikeAC = (id: number): countLikeType => ({type: LIKE_COUNT, id})
 export const setUserProfileAC = (profile: userProfileType): setUserProfileType => ({type: SET_USER_PROFILE, profile})
+
+export const getUserProfile = (userId: string) => {
+    return (dispatch: Dispatch<any>) => {
+        profileAPI.getUsersProfile(userId)
+            .then(response => {
+                dispatch(setUserProfileAC(response.data))
+            });
+    }
+}

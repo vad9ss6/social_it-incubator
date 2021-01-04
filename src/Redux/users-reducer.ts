@@ -63,7 +63,7 @@ const initialState: usersType = {
     users: [],
     pageSize: 23,
     totalUsersCount: 0,
-    currentPage: 1,
+    currentPage: 100,
     isFetching: false,
     followingInProgress: []
 }
@@ -150,6 +150,7 @@ export const getUsers = (currentPage: number, pageSize: number) => {
                 dispatch(setIsFetching(false))
                 dispatch(setUsers(data.items))
                 dispatch(setTotalUsersCount(data.totalCount))
+                dispatch(setCurrentPageAC(currentPage))
             });
     }
 }
