@@ -3,6 +3,7 @@ import avatar from '../../assets/images/avatar.png'
 import Pagination from "react-js-pagination";
 import styleUser from './users.module.css'
 import {NavLink} from 'react-router-dom';
+import commonStyle from '../Common/style/commonStyle.module.css'
 
 type PhotoType = {
     small: string
@@ -23,7 +24,6 @@ export type UsersPropType = {
     currentPage: number
     onCurrentPage: (p: number) => void
     followingInProgress: Array<any>
-    toggleIsFollowingProgress: (isFetching: boolean, userId: number) => void
     follow: (id: number) => void
     unFollow: (id: number) => void
 }
@@ -34,12 +34,11 @@ const Users = (props: UsersPropType) => {
     // for (let i = 1; i <= pageCount; i++){
     //     page.push(i)
     // }
-
-    return <div>
+    return <div className={commonStyle.container}>
         <div>
             <Pagination totalItemsCount={props.totalUsersCount}
                         itemsCountPerPage={props.pageSize}
-                        pageRangeDisplayed={5}
+                        pageRangeDisplayed={10}
                         onChange={(pageNumber) => props.onCurrentPage(pageNumber)}
                         activePage={props.currentPage} innerClass={styleUser.pagination}
                         itemClass={styleUser.pagination_item}/>

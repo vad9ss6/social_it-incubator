@@ -1,5 +1,6 @@
 import React, {ChangeEvent} from "react";
 import Post from "./Post/Post";
+import commonStyle from "../../Common/style/commonStyle.module.css"
 
 type PostType = {
     id: number
@@ -23,7 +24,7 @@ const MyPosts = (props: ProfilePropsType) => {
         props.onPostChange(newValue)
     }
     return (
-        <div>
+        <div className={commonStyle.container}>
             <h3>MyPosts</h3>
             <div>
                 <textarea placeholder='Enter your post' value={props.newPostText} onChange={onChangeText} />
