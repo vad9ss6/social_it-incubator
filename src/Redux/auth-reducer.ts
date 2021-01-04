@@ -1,5 +1,5 @@
 import {Dispatch} from "react";
-import {usersAPI} from "../api/api";
+import {AuthMe} from "../api/api";
 
 const SET_USER_DATE = 'SET_USER_DATE'
 
@@ -41,7 +41,7 @@ export const setAuthUserDateAC = (data: authType): setUserType => ({type: SET_US
 
 export const getAuthUser = () => {
     return (dispatch: Dispatch<any>) =>{
-        usersAPI.AuthMe()
+        AuthMe.me()
             .then(response =>{
                 if(response.data.resultCode === 0){
                     dispatch(setAuthUserDateAC(response.data.data))
