@@ -12,7 +12,7 @@ export const usersAPI = {
     getUsers( currentPage: number, pageSize: number ) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(response => response.data)
     },
-    AuthMe() {
+    me() {
         return instance.get('auth/me')
     },
     follow( id: number ) {
@@ -20,14 +20,19 @@ export const usersAPI = {
     },
     unFollow( id: number ) {
         return instance.delete(`follow/${id}`)
-    }
-}
-
-export const profileAPI = {
+    },
     getUsersProfile(userId: string){
         return instance.get(`profile/${userId}`)
     }
 }
+
+export const AuthMe = {
+    me() {
+        return instance.get('auth/me')
+    },
+}
+
+
 
 
 
