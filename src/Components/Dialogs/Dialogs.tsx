@@ -4,7 +4,6 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogsType, MessageType} from "../../Redux/state";
 import commonStyle from "../Common/style/commonStyle.module.css";
-import {authType} from "../../Redux/auth-reducer";
 import { Redirect } from "react-router-dom";
 
 
