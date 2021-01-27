@@ -143,7 +143,7 @@ export const toggleIsFollowingProgress = (isFetching: boolean, userId: number): 
 //  Thunk
 
 export const getUsers = (currentPage: number, pageSize: number) => {
-    return (dispatch: Dispatch<any>) => {
+    return (dispatch: Dispatch<ActionUsersType>) => {
         dispatch(setIsFetching(true))
         usersAPI.getUsers(currentPage, pageSize)
             .then(data => {
@@ -156,7 +156,7 @@ export const getUsers = (currentPage: number, pageSize: number) => {
 }
 
 export const follow = (userId: number) => {
-    return (dispatch: Dispatch<any>) => {
+    return (dispatch: Dispatch<ActionUsersType>) => {
         dispatch(toggleIsFollowingProgress(true, userId));
         usersAPI.follow(userId).then(response => {
             if (response.data.resultCode === 0) {
@@ -169,7 +169,7 @@ export const follow = (userId: number) => {
 }
 
 export const unFollow = (userId: number) => {
-    return (dispatch: Dispatch<any>) => {
+    return (dispatch: Dispatch<ActionUsersType>) => {
         dispatch(toggleIsFollowingProgress(true, userId));
         usersAPI.unFollow(userId).then(response => {
             if (response.data.resultCode === 0) {
