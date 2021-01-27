@@ -7,9 +7,10 @@ const SideBar = () => {
     return(
         <aside className={`${s.sideBar} ${commonStyle.container}`}>
             <nav>
-                <NavLink to="/profile" >Profile</NavLink>
-                <NavLink to="/dialogs">Messages</NavLink>
-                <NavLink to="/usersAPIComponent">Users</NavLink>
+                <NavLink to="/profile" activeClassName={s.active}>Profile</NavLink>
+                <NavLink to="/dialogs" activeClassName={s.active}>Messages</NavLink>
+                <NavLink to="/usersAPIComponent" activeClassName={s.active}>Users</NavLink>
+                <NavLink to="/Login" activeClassName={s.active}>Login</NavLink>
             </nav>
         </aside>
     )
