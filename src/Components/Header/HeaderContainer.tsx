@@ -26,5 +26,5 @@ const MSTPType = (state: IGlobalState):MSTPType => ({
     isAuth: state.auth.isAuth,
     login: state.auth.login
 });
-export default connect(MSTPType, {setAuthUserDateAC, getAuthUser})(HeaderContainer)
+export default connect<MSTPType, MDTPType, {}, IGlobalState>(MSTPType, {setAuthUserDateAC, getAuthUser})(HeaderContainer)
 
