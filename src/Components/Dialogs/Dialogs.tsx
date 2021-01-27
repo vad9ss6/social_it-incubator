@@ -4,7 +4,7 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogsType, MessageType} from "../../Redux/state";
 import commonStyle from "../Common/style/commonStyle.module.css";
-import { Redirect } from "react-router-dom";
+
 
 
 type DialogsPageType = {
@@ -30,7 +30,7 @@ const Dialogs = (props: DialogsPropsType) => {
         props.sendMessageClick()
     }
 
-    if(!props.isAuth) return <Redirect to={'/Login'}/>
+
 
     return <div className={s.dialogs}>
         <div className={`${s.dialogsItems} ${commonStyle.container}`}>
